@@ -2,10 +2,12 @@
   "name": "liri-node-app",
   "version": "1.0.0",
   "description": "It's like Siri but not...",
-  "main": "app.js",
+  "main": "keys.js",
   "dependencies": {
     "dotenv": "^5.0.1",
+    "ins": "^0.0.0",
     "node-spotify-api": "^1.0.7",
+    "request": "^2.85.0",
     "twitter": "^1.7.1"
   },
   "devDependencies": {},
