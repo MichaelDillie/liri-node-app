@@ -7,7 +7,6 @@ var request = require('request');
 var keys = require("./keys.js");
 
 var spotify = new Spotify(keys.spotify);
-var client = new Twitter(keys.twitter);
 
 var nodeArgs = process.argv;
 var command = process.argv[2];
@@ -17,12 +16,19 @@ var movieName = "";
 
 // Twitter
 if(command === "my-tweets") {
+    var client = new Twitter(keys.twitter);
 
 }
 
 // Spotify
 else if(command === "spotify-this-song") {
-
+    spotify.search({ type: 'track', query: 'All the Small Things' })
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 }
 
 // OMDB
@@ -37,13 +43,14 @@ else if(command === "movie-this") {
             console.log("-----------------------------------------------------------------------");
             console.log("Title: " + JSON.parse(body).Title);
             console.log("Year: " + JSON.parse(body).Year);
-            console.log("IMDB Rating: " + JSON.parse(body).Ratings[0].Value);
-            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            // console.log("IMDB Rating: " + JSON.parse(body).Ratings[0].Value);
+            // console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
             console.log("Country Produced: " + JSON.parse(body).Country);
             console.log("Language: " + JSON.parse(body).Language);
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("Actors: " + JSON.parse(body).Actors);
             console.log("----------------------------------------------------------------------");
+            console.log(queryUrl);
         }
     });
 }
