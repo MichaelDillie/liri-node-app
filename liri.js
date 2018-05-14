@@ -14,8 +14,48 @@ var songName = "";
 var twitterName = "";
 
 
+switch (command) {
+    case "-t":
+        myTweets();
+        break;
+    case "-s":
+        spotifyThis();
+        break;
+    case "-m":
+        movieThis();
+        break;
+    case "-d":
+        doWhatTheySay();
+        break;
+    case "":
+        noEntry();
+        break;
+    case "-help":
+        help();
+        break;
+    default:
+        wrongEntry();
+}
+
+// Wrong Entry
+function wrongEntry() {
+    console.log("*********************");
+    console.log(command + " is not a command");
+    console.log("*********************");
+    console.log("COMMANDS");
+    console.log("-t twitter username : Your tweets");
+    console.log("-s song : Spotify song");
+    console.log("-m movie : OMDB of movie");
+    console.log("-d command : Will do what you say");
+}
+
+// No entry
+function noEntry() {
+    console.log("You need to enter a command");
+}
+
 // Twitter
-if (command === "my-tweets") {
+function myTweets() {
     var client = new Twitter(keys.twitter);
     for (var i = 3; i < nodeArgs.length; i++) {
         twitterName += nodeArgs[i] + " ";
@@ -39,7 +79,7 @@ if (command === "my-tweets") {
 }
 
 // Spotify
-else if (command === "spotify-this-song") {
+function spotifyThis() {
     var spotify = new Spotify(keys.spotify);
     for (var i = 3; i < nodeArgs.length; i++) {
         songName += nodeArgs[i] + " ";
@@ -53,18 +93,18 @@ else if (command === "spotify-this-song") {
             console.log('Error occurred: ' + err);
             return;
         } else {
-                console.log("----------------------------------------------------------------------");
-                console.log("Song Name: " + songName.toUpperCase());
-                console.log("Album Name: " + data.tracks.items[0].album.name);
-                console.log("Artist Name: " + data.tracks.items[0].album.artists[0].name);
-                console.log("URL: " + data.tracks.items[0].album.external_urls.spotify);
-                console.log("----------------------------------------------------------------------");
+            console.log("----------------------------------------------------------------------");
+            console.log("Song Name: " + songName.toUpperCase());
+            console.log("Album Name: " + data.tracks.items[0].album.name);
+            console.log("Artist Name: " + data.tracks.items[0].album.artists[0].name);
+            console.log("URL: " + data.tracks.items[0].album.external_urls.spotify);
+            console.log("----------------------------------------------------------------------");
         }
     });
 }
 
 // OMDB
-else if (command === "movie-this") {
+function movieThis() {
     for (var i = 3; i < nodeArgs.length; i++) {
         movieName += nodeArgs[i] + " ";
     }
@@ -88,7 +128,7 @@ else if (command === "movie-this") {
 }
 
 // Do What It Says
-else if (command === "do-what-it-says") {
+function doWhatTheySay() {
     for (var i = 3; i < nodeArgs.length; i++) {
         console.log(nodeArgs[i]);
     }
