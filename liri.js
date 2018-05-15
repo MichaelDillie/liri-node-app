@@ -13,7 +13,9 @@ var movieName = "";
 var songName = "";
 var twitterName = "";
 
+// console.clear();
 
+// Switch Statement
 switch (command) {
     case "-t":
         myTweets();
